@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serapeo di Pozzuoli - AR</title>
+    <!-- Importazione A-Frame e MindAR -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    
+    <a-scene 
+      mindar-image="imageTargetSrc: ./pianta.mind;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <!-- Caricamento del modello 3D GLB -->
+        <a-asset-item id="modelloSerapeo" src="./copertura.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Target 0: Associa il modello 3D all'immagine -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- Modello 3D sovrapposto alla pianta -->
+        <!-- Puoi regolare scale="x y z", position="x y z" e rotation="x y z" se necessario -->
+        <a-gltf-model 
+          src="#modelloSerapeo" 
+          position="0 0 0" 
+          rotation="0 0 0" 
+          scale="1 1 1" 
+          material="opacity: 0.8; transparent: true">
+        </a-gltf-model>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
